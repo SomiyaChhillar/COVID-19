@@ -2,6 +2,12 @@
 
 Data scraping is done using **BeautifulSoup** and **requests**. Data has been scraped from **[MohHFW](https://www.mohfw.gov.in/)** website, the official website for COVID-19 for India. 
 
+# Heat Map
+Libraries used : Geopandas and Matplotlib
+
+    country = geopandas.read_file('India/Indian_States.shp')
+	ax = country.plot(column='total_cases', legend=True)
+
 
 # Environment 💻
 
