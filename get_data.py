@@ -23,6 +23,12 @@ for i in range(1,33):
 	total = state[2].text
 	cured = state[3].text
 	death = state[4].text
+
+	if(name=='Madhya Pradesh#'):
+		print('MP')
+		state = 'Madhya Pradesh'
+		death = death[:-1]
+
 	
 	obj = {"state":name, "total_cases":total, "cured":cured, "death":death}
 	data.append(obj)
