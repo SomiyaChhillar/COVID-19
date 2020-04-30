@@ -33,7 +33,7 @@ for i in range(1,33):
 	obj = {"state":name, "total_cases":total, "cured":cured, "death":death}
 	data.append(obj)
 
-with open('data.json', 'w') as f:
+with open('Data/data.json', 'w') as f:
 	json.dump(data, f)
 
 
