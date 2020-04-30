@@ -14,3 +14,5 @@ To activate the environment:
 
     conda  activate  ytscrape
 
+P.S. : Sorry I was using the same environment for scraping YouTube caption a while back and hence the name of the environment. 
+
