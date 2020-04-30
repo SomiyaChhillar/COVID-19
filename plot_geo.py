@@ -8,44 +8,22 @@ import matplotlib.pyplot as plt
 import json
 
 country = geopandas.read_file('India/Indian_States.shp')
-# print(help(geopandas.geodataframe.GeoDataFrame))
+
+country['total_cases'] = -1
+
+# country.loc[country.st_nm == 'Andaman & Nicobar Island', 'total_cases'] = 100
 
 with open('Data/data.json') as f:
 	data = json.load(f)
 
-country['total_cases'] = -1
-
 for state in data:
-	country[country.st_nm == state['state']].total_cases = pd.Series([int(state['total_cases'])])
-	print(type(country[country.st_nm == state['state']].total_cases))
-	print(type(pd.Series(int(state['total_cases']))))
-	print(country[country.st_nm == state['state']])
-	print(pd.Series(int(state['total_cases'])))
-	break
+	country.loc[country.st_nm == state['state'], 'total_cases'] = int(state['total_cases'])
+
+country = country[country.total_cases != -1]
+
+ax = country.plot(column='total_cases', legend=True)
+country.apply(lambda x: ax.annotate(s=str(x.total_cases), xy=x.geometry.centroid.coords[0], ha='center'),axis=1);
+ax.set_title('Heat Map for COVID-19')
 
 
-# fin.plot()
-# plt.show()
-	
-
-# df = pd.DataFrame(data)
-# plt.figure(1)
-# plt.title('To check for missing values')
-# msn.bar(df, color='darkolivegreen')
-
-# # country.plot()
-# plt.show()
-
-# world = geopandas.read_file(geopandas.datasets.get_path('naturalearth_lowres'))
-# print(world.info())
-# cities = geopandas.read_file(geopandas.datasets.get_path('naturalearth_cities'))
-
-# world = world[(world.pop_est>0) & (world.name!="Antarctica")]
-# world['gdp_per_cap'] = world.gdp_md_est / world.pop_est
-
-
-# print(world.info())
-# world.plot(column='pop_est')
-
-
-# plt.show()
+plt.show()
